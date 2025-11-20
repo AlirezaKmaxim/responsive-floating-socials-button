@@ -1,0 +1,301 @@
+:root {
+  /* رنگ‌ها */
+  --color-body-bg: #f9f9f9;
+  --color-accent-phone: #383838;
+  --color-accent-whatsapp: #1aa74d;
+  --color-accent-telegram: #0d87c4;
+  --color-accent-instagram: #be154e;
+  --color-text-light: #ffffff;
+
+  --color-main-btn-gradient: linear-gradient(
+    135deg,
+    #f2c94c,
+    #b27a2b,
+    #5a3b1e
+  );
+
+  --support-btn-size: 85px;
+  --support-btn-icon-size: 40px;
+  --modal-width-desktop: 280px;
+  --modal-padding-desktop: 20px;
+  --modal-radius: 8px;
+  --card-padding-desktop: 20px;
+  --card-radius: 6px;
+  --gap-desktop: 0.9rem;
+  --shadow-modal: 0 6px 18px rgba(0, 0, 0, 0.15);
+
+  --font-family-base: sans-serif;
+  --font-size-base: 15px;
+  --font-weight-medium: 500;
+
+  --support-btn-size-mobile: 70px;
+  --support-btn-icon-size-mobile: 35px;
+  --modal-padding-mobile: 13px;
+  --card-padding-mobile: 15px;
+  --font-size-mobile: 14px;
+  --gap-mobile: 15px;
+
+  --backdrop-color: rgba(0, 0, 0, 0.5);
+  --pulse-shadow-color: rgba(242, 201, 76, 0.6); /* طلایی نرم */
+}
+
+
+body {
+  background-color: var(--color-body-bg);
+  direction: rtl;
+  margin: 0;
+  padding: 2rem;
+  font-family: var(--font-family-base);
+}
+
+
+.modal-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 500px;
+  z-index: 1000;
+}
+
+
+.modal-btn {
+  width: var(--support-btn-size);
+  height: var(--support-btn-size);
+  background-image: var(--color-main-btn-gradient);
+  background-size: 200% 200%;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 1s infinite;
+  transition: background-position 0.4s ease, transform 0.2s ease;
+}
+
+.modal-btn svg {
+  width: var(--support-btn-icon-size);
+  height: var(--support-btn-icon-size);
+  fill: var(--color-text-light);
+}
+
+.modal-btn:hover {
+  background-position: 100% 0;
+  transform: translateY(-2px);
+}
+
+/* انیمیشن پالس */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--pulse-shadow-color);
+  }
+  50% {
+    box-shadow: 0 0 0 20px rgba(242, 201, 76, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(242, 201, 76, 0);
+  }
+}
+
+
+#modal-toggle {
+  display: none;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--backdrop-color);
+  display: none;
+  z-index: 900;
+}
+
+#modal-toggle:checked ~ .modal-backdrop {
+  display: block;
+}
+
+.modal-content {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 4rem;
+  background: #e8ebff;
+  border-radius: var(--modal-radius);
+  padding: var(--modal-padding-desktop);
+  box-shadow: var(--shadow-modal);
+  width: var(--modal-width-desktop);
+  display: none;
+  animation: fadeInUp 0.4s ease;
+  z-index: 1001;
+  box-sizing: border-box;
+}
+
+#modal-toggle:checked ~ .modal-content {
+  display: block;
+}
+
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-desktop);
+}
+
+/* ====== باکس‌های لیست ====== */
+
+.modal-content li a {
+  --accent: #999; /* پیشفرض، هر نوع باکس override می‌کند */
+
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-base);
+  transition: color 0.2s, background-color 0.2s;
+  width: 100%;
+  padding: var(--card-padding-desktop);
+  border-radius: var(--card-radius);
+  box-sizing: border-box;
+  background-color: var(--accent);
+}
+
+/* افکت Shine */
+.modal-content li a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0)
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0% {
+    left: -120%;
+  }
+  100% {
+    left: 140%;
+  }
+}
+
+.modal-content li a svg {
+  flex-shrink: 1;
+  width: 30px;
+  height: 30px;
+  fill: var(--color-text-light);
+  transition: fill 0.3s;
+}
+
+/* رنگ اختصاصی هر دکمه */
+.modal-content li a.phone {
+  --accent: var(--color-accent-phone);
+}
+
+.modal-content li a.whatsapp {
+  --accent: var(--color-accent-whatsapp);
+}
+
+.modal-content li a.telegram {
+  --accent: var(--color-accent-telegram);
+}
+
+.modal-content li a.instagram {
+  --accent: var(--color-accent-instagram);
+}
+
+/* Hover: پس‌زمینه هم‌رنگ برند + Shine */
+.modal-content li a:hover {
+  background-color: var(--accent);
+  color: var(--color-text-light);
+}
+
+.modal-content li a:hover svg {
+  fill: var(--color-text-light);
+}
+
+.modal-content li a:hover::after {
+  animation: shine 0.6s ease-in-out;
+}
+
+/* انیمیشن ورود مودال */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   MOBILE (≤ 600px)
+   ========================= */
+@media screen and (max-width: 600px) {
+  .modal-container {
+    bottom: 1.3rem;
+    right: 1.3rem;
+  }
+
+  .modal-btn {
+    width: var(--support-btn-size-mobile);
+    height: var(--support-btn-size-mobile);
+  }
+
+  .modal-btn svg {
+    width: var(--support-btn-icon-size-mobile);
+    height: var(--support-btn-icon-size-mobile);
+  }
+
+  .modal-content {
+    bottom: 5.1rem;
+    right: 3rem;
+    left: -50%;
+    width: 70%;
+    max-width: 90%;
+    border-radius: 10px;
+    padding: var(--modal-padding-mobile);
+    box-sizing: border-box;
+  }
+
+  .modal-content ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--gap-mobile);
+    margin: 0;
+    padding: 0;
+  }
+
+  .modal-content li {
+    margin: 0;
+  }
+
+  .modal-content li a {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--card-padding-mobile);
+    font-size: var(--font-size-mobile);
+    gap: 1rem;
+  }
+
+  .modal-content li a svg {
+    width: 28px;
+    height:  28px;
+    align-self: center;
+  }
+}
