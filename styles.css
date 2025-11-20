@@ -16,8 +16,8 @@
 
   --support-btn-size: 85px;
   --support-btn-icon-size: 40px;
-  --modal-width-desktop: 280px;
-  --modal-padding-desktop: 20px;
+  --modal-width-desktop: 260px;
+  --modal-padding-desktop: 15px 10px;
   --modal-radius: 8px;
   --card-padding-desktop: 20px;
   --card-radius: 6px;
@@ -69,7 +69,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: pulse 1s infinite;
+  animation: pulse 2s infinite;
   transition: background-position 0.4s ease, transform 0.2s ease;
 }
 
@@ -116,8 +116,8 @@ body {
 
 .modal-content {
   position: fixed;
-  bottom: 5.5rem;
-  right: 4rem;
+  bottom: 6.5rem;
+  right:4rem;
   background: #e8ebff;
   border-radius: var(--modal-radius);
   padding: var(--modal-padding-desktop);
@@ -139,6 +139,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   gap: var(--gap-desktop);
 }
 
@@ -146,12 +147,12 @@ body {
 
 .modal-content li a {
   --accent: #999; /* پیشفرض، هر نوع باکس override می‌کند */
-
+  align-self: center;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.1rem;
   text-decoration: none;
   color: var(--color-text-light);
   font-weight: var(--font-weight-medium);
